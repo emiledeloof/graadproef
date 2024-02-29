@@ -53,6 +53,5 @@ print ("Elaspsed time :", elapsed)
 
 print ("Total distance :", distancet)
 
-
 # Reset GPIO settings
 GPIO.cleanup()
