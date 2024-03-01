@@ -44,22 +44,22 @@ print('Duration Fwd set to ' + str(durationFwd))
 print('Duration Bwd set to ' + str(durationBwd))
 #
 # delay = 0.0000001 # This is actualy a delay between PUL pulses - effectively sets the mtor rotation speed.
-delay = 0.1
+delay = 0.0000001
 print('Speed set to ' + str(delay))
 #
-cycles = 1000 # This is the number of cycles to be run once program is started.
+cycles = 10 # This is the number of cycles to be run once program is started.
 cyclecount = 0 # This is the iteration of cycles to be run once program is started.
 print('number of Cycles to Run set to ' + str(cycles))
 #
 #
 def forward():
     GPIO.output(ENA, GPIO.HIGH)
-    GPIO.output(ENAI, GPIO.HIGH)
+    # GPIO.output(ENAI, GPIO.HIGH)
     print('ENA set to HIGH - Controller Enabled')
     #
     sleep(.5) # pause due to a possible change direction
     GPIO.output(DIR, GPIO.LOW)
-    GPIO.output(DIRI, GPIO.LOW)
+    # GPIO.output(DIRI, GPIO.LOW)
     print('DIR set to LOW - Moving Forward at ' + str(delay))
     print('Controller PUL being driven.')
     for x in range(durationFwd): 
@@ -68,7 +68,7 @@ def forward():
         GPIO.output(PUL, GPIO.LOW)
         sleep(delay)
     GPIO.output(ENA, GPIO.LOW)
-    GPIO.output(ENAI, GPIO.LOW)
+    # GPIO.output(ENAI, GPIO.LOW)
     print('ENA set to LOW - Controller Disabled')
     sleep(.5) # pause for possible change direction
     return
@@ -76,12 +76,12 @@ def forward():
 #
 def reverse():
     GPIO.output(ENA, GPIO.HIGH)
-    GPIO.output(ENAI, GPIO.HIGH)
+    # GPIO.output(ENAI, GPIO.HIGH)
     print('ENA set to HIGH - Controller Enabled')
     #
     sleep(.5) # pause due to a possible change direction
     GPIO.output(DIR, GPIO.HIGH)
-    GPIO.output(DIRI, GPIO.HIGH)
+    # GPIO.output(DIRI, GPIO.HIGH)
     print('DIR set to HIGH - Moving Backward at ' + str(delay))
     print('Controller PUL being driven.')
     #
@@ -91,14 +91,14 @@ def reverse():
         GPIO.output(PUL, GPIO.LOW)
         sleep(delay)
     GPIO.output(ENA, GPIO.LOW)
-    GPIO.output(ENAI, GPIO.LOW)
+    # GPIO.output(ENAI, GPIO.LOW)
     print('ENA set to LOW - Controller Disabled')
     sleep(.5) # pause for possible change direction
     return
 
 while cyclecount < cycles:
     forward()
-    reverse()
+    # reverse()
     cyclecount = (cyclecount + 1)
     print('Number of cycles completed: ' + str(cyclecount))
     print('Number of cycles remaining: ' + str(cycles - cyclecount))
