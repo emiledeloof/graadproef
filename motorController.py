@@ -28,9 +28,9 @@ GPIO.setup(ENA, GPIO.OUT)
 # GPIO.setup(DIRI, GPIO.OUT)
 # GPIO.setup(ENAI, GPIO.OUT)
 #
-print('PUL = GPIO ' + PUL + ' - RPi 3B-Pin #8')
-print('DIR = GPIO ' + DIR + ' - RPi 3B-Pin #10')
-print('ENA = GPIO ' + ENA + ' - RPi 3B-Pin #12')
+# print('PUL = GPIO ' + PUL + ' - RPi 3B-Pin #8')
+# print('DIR = GPIO ' + DIR + ' - RPi 3B-Pin #10')
+# print('ENA = GPIO ' + ENA + ' - RPi 3B-Pin #12')
 # print('ENAI = GPIO 14 - RPi 3B-Pin #8')
 # print('DIRI = GPIO 15 - RPi 3B-Pin #10')
 
