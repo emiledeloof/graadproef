@@ -14,19 +14,20 @@ GPIO.setup(ENA, GPIO.OUT)
 print('Initialization Completed')
 #
 # Could have usesd only one DURATION constant but chose two. This gives play options.
-durationFwd = 50 # This is the duration of the motor spinning. used for forward direction
-durationBwd = 50 # This is the duration of the motor spinning. used for reverse direction
+durationFwd = 250 # This is the duration of the motor spinning. used for forward direction
+durationBwd = 250 # This is the duration of the motor spinning. used for reverse direction
 
 print('Duration Fwd set to ' + str(durationFwd))
 print('Duration Bwd set to ' + str(durationBwd))
 
 # delay = 0.0000001 # This is actualy a delay between PUL pulses - effectively sets the mtor rotation speed.
-delay = 0.0000000001
+delay = 0.00000001
 print('Speed set to ' + str(delay))
 #
-cycles = 500 # This is the number of cycles to be run once program is started.
+cycles = 204 # This is the number of cycles to be run once program is started.
 cyclecount = 0 # This is the iteration of cycles to be run once program is started.
 print('number of Cycles to Run set to ' + str(cycles))
+angle = 0
 #
 #
 def forward():
@@ -34,7 +35,7 @@ def forward():
     # GPIO.output(ENAI, GPIO.HIGH)
     print('ENA set to HIGH - Controller Enabled')
     #
-    sleep(.005) # pause due to a possible change direction
+    sleep(.0005) # pause due to a possible change direction
     GPIO.output(DIR, GPIO.LOW)
     # GPIO.output(DIRI, GPIO.LOW)
     print('DIR set to LOW - Moving Forward at ' + str(delay))
@@ -47,7 +48,7 @@ def forward():
     GPIO.output(ENA, GPIO.LOW)
     # GPIO.output(ENAI, GPIO.LOW)
     print('ENA set to LOW - Controller Disabled')
-    sleep(.005) # pause for possible change direction
+    sleep(.0005) # pause for possible change direction
     return
 #
 #
@@ -77,6 +78,8 @@ while cyclecount < cycles:
     forward()
     #reverse()
     cyclecount = (cyclecount + 1)
+    angle += 1.8
+    print("Angle: " + str(angle))
     print('Number of cycles completed: ' + str(cyclecount))
     print('Number of cycles remaining: ' + str(cycles - cyclecount))
 #
