@@ -20,8 +20,8 @@ url = "http://192.168.0.101:5001"
 #     request = requests.post(url+"/requests/attempt")
 #     print(request)
 
-attempts = requests.get(url+"/getAttempts") | 0
-goals = requests.get(url+"/getGoals") | 0
+attempts = requests.get(url+"/getAttempts") 
+goals = requests.get(url+"/getGoals")
 
 lcd = CharLCD(i2c_expander='PCF8574', address=0x27, port=1, cols=16, rows=2, dotsize=8)
 lcd.clear()
