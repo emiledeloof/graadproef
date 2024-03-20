@@ -24,9 +24,8 @@ attempts = requests.get(url+"/getAttempts")
 goals = requests.get(url+"/getGoals")
 
 parsedAttempts = json.loads(attempts.text)
-print(f"{parsedAttempts["attempts"]}")
 
 lcd = CharLCD(i2c_expander='PCF8574', address=0x27, port=1, cols=16, rows=2, dotsize=8)
 lcd.clear()
 
-lcd.write_string(f'Attempts: {parsedAttempts}')
+lcd.write_string('Attempts: ' + str(parsedAttempts['attempts']))

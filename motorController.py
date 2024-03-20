@@ -24,7 +24,7 @@ print('Duration Bwd set to ' + str(durationBwd))
 delay = 0.00000001
 print('Speed set to ' + str(delay))
 #
-cycles = 204 # This is the number of cycles to be run once program is started.
+cycles = 29 # This is the number of cycles to be run once program is started.
 cyclecount = 0 # This is the iteration of cycles to be run once program is started.
 print('number of Cycles to Run set to ' + str(cycles))
 angle = 0

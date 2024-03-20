@@ -3,8 +3,8 @@ import time
 
 try:
      GPIO.setmode(GPIO.BOARD)
-     PIN_TRIGGER = 24
-     PIN_ECHO = 23
+     PIN_TRIGGER = 18
+     PIN_ECHO = 16
 
      GPIO.setup(PIN_TRIGGER, GPIO.OUT)
      GPIO.setup(PIN_ECHO, GPIO.IN)
