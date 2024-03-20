@@ -4,7 +4,7 @@ from RPLCD.i2c import CharLCD
 # import RPLCD
 # import smbus2
 
-url = "http://127.0.0.1:5001"
+url = "http://192.168.0.101:5001"
 
 # print("What would you like to test? \n1) Reset DB \n2) Add goal \n3) Add attempt")
 # input = input()
