@@ -4,7 +4,7 @@ from RPLCD.i2c import CharLCD
 # import RPLCD
 # import smbus2
 
-url = "http://192.168.0.101:5001"
+url = "http://192.168.0.101:5001/requests"
 
 # print("What would you like to test? \n1) Reset DB \n2) Add goal \n3) Add attempt")
 # input = input()
@@ -23,7 +23,10 @@ url = "http://192.168.0.101:5001"
 attempts = requests.get(url+"/getAttempts") 
 goals = requests.get(url+"/getGoals")
 
+parsedAttempts = json.loads(attempts.text)
+print(parsedAttempts["attempts"])
+
 lcd = CharLCD(i2c_expander='PCF8574', address=0x27, port=1, cols=16, rows=2, dotsize=8)
 lcd.clear()
 
-lcd.write_string('Attempts: {attempts}\n\rGoals: {goals}')
+lcd.write_string('Attempts: {parsedAttempts}')
