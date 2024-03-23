@@ -20,6 +20,9 @@ url = "http://192.168.0.101:5001/requests"
 #     request = requests.post(url+"/requests/attempt")
 #     print(request)
 
+def auto():
+    print("automatic mode")
+
 attempts = requests.get(url+"/getAttempts") 
 goals = requests.get(url+"/getGoals")
 
