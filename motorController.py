@@ -82,7 +82,7 @@ while cyclecount < cycles:
     print('Number of cycles completed: ' + str(cyclecount))
     print('Number of cycles remaining: ' + str(cycles - cyclecount))
 
-sleep(5)
+sleep(1)
 
 while cyclecount != 0:
     reverse()
