@@ -57,7 +57,7 @@ def reverse():
     # GPIO.output(ENAI, GPIO.HIGH)
     print('ENA set to HIGH - Controller Enabled')
     #
-    sleep(.05) # pause due to a possible change direction
+    sleep(.005) # pause due to a possible change direction
     GPIO.output(DIR, GPIO.HIGH)
     # GPIO.output(DIRI, GPIO.HIGH)
     print('DIR set to HIGH - Moving Backward at ' + str(delay))
@@ -71,7 +71,7 @@ def reverse():
     GPIO.output(ENA, GPIO.LOW)
     # GPIO.output(ENAI, GPIO.LOW)
     print('ENA set to LOW - Controller Disabled')
-    sleep(.05) # pause for possible change direction
+    sleep(.005) # pause for possible change direction
     return
 
 while cyclecount < cycles:
