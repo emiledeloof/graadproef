@@ -88,7 +88,7 @@ isArmDown = False
 
 while(isArmDown == False):
     GPIO.output(PIN_TRIGGER, GPIO.HIGH)
-    time.time.sleep(0.00001)
+    time.sleep(0.00001)
     GPIO.output(PIN_TRIGGER, GPIO.LOW)
 
     while GPIO.input(PIN_ECHO)==0:
@@ -100,7 +100,7 @@ while(isArmDown == False):
     pulse_duration = pulse_end_time - pulse_start_time
     distance = round(pulse_duration * 17150, 2)
     print("Distance:",distance,"cm")
-    time.time.sleep(0.1)
+    time.sleep(0.1)
     if(distance < 10):
         isArmDown = True
         break
