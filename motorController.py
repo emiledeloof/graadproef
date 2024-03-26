@@ -2,7 +2,7 @@
 import RPi.GPIO as GPIO
 import time
 
-#constante definiëren
+#constante definieren
 PUL = 14  # Stepper Drive Pulses
 DIR = 15  # Controller Direction Bit
 PIN_TRIGGER = 24 # Ultrasoon Trig pin
@@ -12,7 +12,7 @@ step = 0.9 # hoek per stap
 # BCM ipv Board
 GPIO.setmode(GPIO.BCM)
 
-# in- en outputs definiëren
+# in- en outputs definieren
 GPIO.setup(PUL, GPIO.OUT)
 GPIO.setup(DIR, GPIO.OUT)
 GPIO.setup(PIN_TRIGGER, GPIO.OUT)
