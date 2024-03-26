@@ -1,19 +1,17 @@
-# from time import sleep
+# Bibliotheken importeren
 import RPi.GPIO as GPIO
 import time
 
 PUL = 14  # Stepper Drive Pulses
-DIR = 15  # Controller Direction Bit (High for Controller default / LOW to Force a Direction Change).
-ENA = 18  # Controller Enable Bit (High to Enable / LOW to Disable).
+DIR = 15  # Controller Direction Bit
+PIN_TRIGGER = 24 # Ultrasoon Trig pin
+PIN_ECHO = 23 # Ultrasoon Echo pin
 
+# BCM ipv Board
 GPIO.setmode(GPIO.BCM)
 
 GPIO.setup(PUL, GPIO.OUT)
 GPIO.setup(DIR, GPIO.OUT)
-GPIO.setup(ENA, GPIO.OUT)
-
-PIN_TRIGGER = 24
-PIN_ECHO = 23
 
 GPIO.setup(PIN_TRIGGER, GPIO.OUT)
 GPIO.setup(PIN_ECHO, GPIO.IN)
@@ -41,13 +39,8 @@ angle = 0
 #
 #
 def forward():
-    GPIO.output(ENA, GPIO.HIGH)
-    # GPIO.output(ENAI, GPIO.HIGH)
-    print('ENA set to HIGH - Controller Enabled')
-    #
     time.sleep(.0005) # pause due to a possible change direction
     GPIO.output(DIR, GPIO.LOW)
-    # GPIO.output(DIRI, GPIO.LOW)
     print('DIR set to LOW - Moving Forward at ' + str(delay))
     print('Controller PUL being driven.')
     for x in range(durationFwd): 
@@ -55,32 +48,21 @@ def forward():
         time.sleep(delay)
         GPIO.output(PUL, GPIO.LOW)
         time.sleep(delay)
-    GPIO.output(ENA, GPIO.LOW)
-    # GPIO.output(ENAI, GPIO.LOW)
-    print('ENA set to LOW - Controller Disabled')
     time.sleep(.0005) # pause for possible change direction
     return
 #
 #
 def reverse():
-    GPIO.output(ENA, GPIO.HIGH)
-    # GPIO.output(ENAI, GPIO.HIGH)
     print('ENA set to HIGH - Controller Enabled')
-    #
     time.sleep(.005) # pause due to a possible change direction
     GPIO.output(DIR, GPIO.HIGH)
-    # GPIO.output(DIRI, GPIO.HIGH)
     print('DIR set to HIGH - Moving Backward at ' + str(delay))
     print('Controller PUL being driven.')
-    #
     for y in range(durationBwd):
         GPIO.output(PUL, GPIO.HIGH)
         time.sleep(delay)
         GPIO.output(PUL, GPIO.LOW)
         time.sleep(delay)
-    GPIO.output(ENA, GPIO.LOW)
-    # GPIO.output(ENAI, GPIO.LOW)
-    print('ENA set to LOW - Controller Disabled')
     time.sleep(.005) # pause for possible change direction
     return
 
@@ -107,6 +89,7 @@ while(isArmDown == False):
 
 
 if(isArmDown == True):
+    time.sleep(0.5)
     while cyclecount < cycles:
         forward()
         cyclecount += 1
@@ -115,7 +98,7 @@ if(isArmDown == True):
         print('Number of cycles completed: ' + str(cyclecount))
         print('Number of cycles remaining: ' + str(cycles - cyclecount))
 
-    time.sleep(1)
+    time.sleep(2)
 
     while cyclecount != 0:
         reverse()
@@ -124,7 +107,6 @@ if(isArmDown == True):
         print("Angle: " + str(angle))
         print('Number of cycles completed: ' + str(cyclecount))
         print('Number of cycles remaining: ' + str(cycles - cyclecount))
-#
+
 GPIO.cleanup()
 print('Cycling Completed')
-#
