@@ -94,7 +94,7 @@ if(isArmDown == True):
         forward()
         cyclecount += 1
         angle += 0.9
-        print("Angle: " + str(angle))
+        print("Angle: " + str(round(angle, 2)))
         print('Number of cycles completed: ' + str(cyclecount))
         print('Number of cycles remaining: ' + str(cycles - cyclecount))
 
@@ -104,7 +104,7 @@ if(isArmDown == True):
         reverse()
         cyclecount -= 1
         angle -= 0.9
-        print("Angle: " + str(angle))
+        print("Angle: " + str(round(angle, 2)))
         print('Number of cycles completed: ' + str(cyclecount))
         print('Number of cycles remaining: ' + str(cycles - cyclecount))
 
