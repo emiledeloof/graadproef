@@ -2,48 +2,45 @@
 import RPi.GPIO as GPIO
 import time
 
+#constante definiëren
 PUL = 14  # Stepper Drive Pulses
 DIR = 15  # Controller Direction Bit
 PIN_TRIGGER = 24 # Ultrasoon Trig pin
 PIN_ECHO = 23 # Ultrasoon Echo pin
+step = 0.9 # hoek per stap
 
 # BCM ipv Board
 GPIO.setmode(GPIO.BCM)
 
+# in- en outputs definiëren
 GPIO.setup(PUL, GPIO.OUT)
 GPIO.setup(DIR, GPIO.OUT)
-
 GPIO.setup(PIN_TRIGGER, GPIO.OUT)
 GPIO.setup(PIN_ECHO, GPIO.IN)
 GPIO.output(PIN_TRIGGER, GPIO.LOW)
 
 print("Setting up Sensor")
-
 print('Initialization Completed')
-#
-# Could have usesd only one DURATION constant but chose two. This gives play options.
+
 durationFwd = 250 # This is the duration of the motor spinning. used for forward direction
 durationBwd = 250 # This is the duration of the motor spinning. used for reverse direction
 
 print('Duration Fwd set to ' + str(durationFwd))
 print('Duration Bwd set to ' + str(durationBwd))
 
-# delay = 0.0000001 # This is actualy a delay between PUL pulses - effectively sets the mtor rotation speed.
+# tijd tussen pulsen, definieert motorsnelheid
 delay = 0.00000001
 print('Speed set to ' + str(delay))
 #
-cycles = 29 # This is the number of cycles to be run once program is started.
-cyclecount = 0 # This is the iteration of cycles to be run once program is started.
+cycles = 29 # aantal pulsen te versturen
+cyclecount = 0 # aantal pulsen verstuurd
 print('number of Cycles to Run set to ' + str(cycles))
-angle = 0
-#
-#
+
 def forward():
-    time.sleep(.0005) # pause due to a possible change direction
-    GPIO.output(DIR, GPIO.LOW)
-    print('DIR set to LOW - Moving Forward at ' + str(delay))
-    print('Controller PUL being driven.')
+    time.sleep(.0005) # pauze tussen pulsen
+    GPIO.output(DIR, GPIO.LOW) # geen pulsen sturen naar DIR pin op driver => CW draaien. 
     for x in range(durationFwd): 
+        print("hello")
         GPIO.output(PUL, GPIO.HIGH)
         time.sleep(delay)
         GPIO.output(PUL, GPIO.LOW)
@@ -87,13 +84,14 @@ while(isArmDown == False):
         isArmDown = True
         break
 
+angle = 0 # effectieve hoek afh. van step
 
 if(isArmDown == True):
     time.sleep(0.5)
     while cyclecount < cycles:
         forward()
         cyclecount += 1
-        angle += 0.9
+        angle += step
         print("Angle: " + str(round(angle, 2)))
         print('Number of cycles completed: ' + str(cyclecount))
         print('Number of cycles remaining: ' + str(cycles - cyclecount))
@@ -103,7 +101,7 @@ if(isArmDown == True):
     while cyclecount != 0:
         reverse()
         cyclecount -= 1
-        angle -= 0.9
+        angle -= step
         print("Angle: " + str(round(angle, 2)))
         print('Number of cycles completed: ' + str(cyclecount))
         print('Number of cycles remaining: ' + str(cycles - cyclecount))
