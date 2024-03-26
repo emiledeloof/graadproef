@@ -93,7 +93,7 @@ if(isArmDown == True):
     while cyclecount < cycles:
         forward()
         cyclecount += 1
-        angle += 1.8
+        angle += 0.9
         print("Angle: " + str(angle))
         print('Number of cycles completed: ' + str(cyclecount))
         print('Number of cycles remaining: ' + str(cycles - cyclecount))
@@ -103,7 +103,7 @@ if(isArmDown == True):
     while cyclecount != 0:
         reverse()
         cyclecount -= 1
-        angle += 1.8
+        angle -= 0.9
         print("Angle: " + str(angle))
         print('Number of cycles completed: ' + str(cyclecount))
         print('Number of cycles remaining: ' + str(cycles - cyclecount))
