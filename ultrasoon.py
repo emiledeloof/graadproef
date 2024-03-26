@@ -2,17 +2,15 @@ import RPi.GPIO as GPIO
 import time
 
 try:
-     GPIO.setmode(GPIO.BOARD)
-     PIN_TRIGGER = 18
-     PIN_ECHO = 16
+     GPIO.setmode(GPIO.BCM)
+     PIN_TRIGGER = 24
+     PIN_ECHO = 23
 
      GPIO.setup(PIN_TRIGGER, GPIO.OUT)
      GPIO.setup(PIN_ECHO, GPIO.IN)
      GPIO.output(PIN_TRIGGER, GPIO.LOW)
 
      print("Setting up Sensor")
-
-     time.sleep(2)
 
      while(True):
          GPIO.output(PIN_TRIGGER, GPIO.HIGH)
