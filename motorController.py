@@ -39,28 +39,22 @@ print('number of Cycles to Run set to ' + str(cycles))
 def forward():
     time.sleep(.0005) # pauze tussen pulsen
     GPIO.output(DIR, GPIO.LOW) # geen pulsen sturen naar DIR pin op driver => CW draaien. 
-    for x in range(durationFwd): 
-        print("hello")
+    for x in range(durationFwd): # pulsen versturen naar driver
         GPIO.output(PUL, GPIO.HIGH)
         time.sleep(delay)
         GPIO.output(PUL, GPIO.LOW)
         time.sleep(delay)
-    time.sleep(.0005) # pause for possible change direction
+    time.sleep(.0005) 
     return
-#
-#
+
 def reverse():
-    print('ENA set to HIGH - Controller Enabled')
-    time.sleep(.005) # pause due to a possible change direction
-    GPIO.output(DIR, GPIO.HIGH)
-    print('DIR set to HIGH - Moving Backward at ' + str(delay))
-    print('Controller PUL being driven.')
+    time.sleep(.005) 
+    GPIO.output(DIR, GPIO.HIGH) # DIR CCW
     for y in range(durationBwd):
         GPIO.output(PUL, GPIO.HIGH)
         time.sleep(delay)
         GPIO.output(PUL, GPIO.LOW)
         time.sleep(delay)
-    time.sleep(.005) # pause for possible change direction
     return
 
 isArmDown = False
