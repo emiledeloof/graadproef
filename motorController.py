@@ -99,6 +99,8 @@ while True:
             print("Angle: " + str(round(angle, 2)))
             print('Number of cycles completed: ' + str(cyclecount))
             print('Number of cycles remaining: ' + str(cycles - cyclecount))
+    if(angle > 360):
+        break
 
-    GPIO.cleanup()
-    print('Cycling Completed')
+GPIO.cleanup()
+print('Cycling Completed')
