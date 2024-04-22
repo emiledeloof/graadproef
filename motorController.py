@@ -99,6 +99,8 @@ while True:
             print("Angle: " + str(round(angle, 2)))
             print('Number of cycles completed: ' + str(cyclecount))
             print('Number of cycles remaining: ' + str(cycles - cyclecount))
+        
+        isArmDown = False
     if(angle > 360):
         break
 
