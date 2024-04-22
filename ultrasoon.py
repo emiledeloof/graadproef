@@ -17,6 +17,9 @@ try:
          time.sleep(0.00001)
          GPIO.output(PIN_TRIGGER, GPIO.LOW)
 
+         pulse_start_time = 0
+         pulse_end_time = 0
+
          while GPIO.input(PIN_ECHO)==0:
                pulse_start_time = time.time()
 
@@ -25,7 +28,7 @@ try:
 
          pulse_duration = pulse_end_time - pulse_start_time
          distance = round(pulse_duration * 17150, 2)
-         print("Distance:",distance,"cm")
+         print("Distance: ",distance,"cm")
          time.sleep(0.1)
 
 finally:
