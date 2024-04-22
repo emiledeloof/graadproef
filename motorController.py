@@ -36,50 +36,50 @@ cycles = 29
 cyclecount = 0 
 print('number of Cycles to Run set to ' + str(cycles))
 
-def forward():
-    time.sleep(.0005) # pauze tussen pulsen
-    GPIO.output(DIR, GPIO.LOW) # geen pulsen sturen naar DIR pin op driver => CW draaien. 
-    for x in range(durationFwd): # pulsen versturen naar driver
-        GPIO.output(PUL, GPIO.HIGH)
-        time.sleep(delay)
-        GPIO.output(PUL, GPIO.LOW)
-        time.sleep(delay)
-    time.sleep(.0005) 
-    return
-
-def reverse():
-    time.sleep(.005) 
-    GPIO.output(DIR, GPIO.HIGH) # DIR CCW
-    for y in range(durationBwd):
-        GPIO.output(PUL, GPIO.HIGH)
-        time.sleep(delay)
-        GPIO.output(PUL, GPIO.LOW)
-        time.sleep(delay)
-    return
-
-isArmDown = False
-
-while(isArmDown == False):
-    GPIO.output(PIN_TRIGGER, GPIO.HIGH)
-    time.sleep(0.00001)
-    GPIO.output(PIN_TRIGGER, GPIO.LOW)
-
-    while GPIO.input(PIN_ECHO)==0:
-        pulse_start_time = time.time()
-
-    while GPIO.input(PIN_ECHO)==1:
-        pulse_end_time = time.time()
-
-    pulse_duration = pulse_end_time - pulse_start_time
-    distance = round(pulse_duration * 17150, 2)
-    print("Distance:",distance,"cm")
-    time.sleep(0.1)
-    if(distance < 10):
-        isArmDown = True
-        break
-
-angle = 0 # effectieve hoek afh. van step
 while True:
+    def forward():
+        time.sleep(.0005) # pauze tussen pulsen
+        GPIO.output(DIR, GPIO.LOW) # geen pulsen sturen naar DIR pin op driver => CW draaien. 
+        for x in range(durationFwd): # pulsen versturen naar driver
+            GPIO.output(PUL, GPIO.HIGH)
+            time.sleep(delay)
+            GPIO.output(PUL, GPIO.LOW)
+            time.sleep(delay)
+        time.sleep(.0005) 
+        return
+
+    def reverse():
+        time.sleep(.005) 
+        GPIO.output(DIR, GPIO.HIGH) # DIR CCW
+        for y in range(durationBwd):
+            GPIO.output(PUL, GPIO.HIGH)
+            time.sleep(delay)
+            GPIO.output(PUL, GPIO.LOW)
+            time.sleep(delay)
+        return
+
+    isArmDown = False
+
+    while(isArmDown == False):
+        GPIO.output(PIN_TRIGGER, GPIO.HIGH)
+        time.sleep(0.00001)
+        GPIO.output(PIN_TRIGGER, GPIO.LOW)
+
+        while GPIO.input(PIN_ECHO)==0:
+            pulse_start_time = time.time()
+
+        while GPIO.input(PIN_ECHO)==1:
+            pulse_end_time = time.time()
+
+        pulse_duration = pulse_end_time - pulse_start_time
+        distance = round(pulse_duration * 17150, 2)
+        print("Distance:",distance,"cm")
+        time.sleep(0.1)
+        if(distance < 10):
+            isArmDown = True
+            break
+
+    angle = 0 # effectieve hoek afh. van step
     if(isArmDown == True):
         time.sleep(0.5)
         while cyclecount < cycles:
