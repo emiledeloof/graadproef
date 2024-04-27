@@ -2,6 +2,8 @@
 import RPi.GPIO as GPIO
 import time
 import requests
+import json
+from RPLCD.i2c import CharLCD
 
 #constanten definieren
 PUL = 14  # Driver PUL pin
@@ -40,6 +42,10 @@ print('Speed set to ' + str(delay))
 cycles = 29 
 cyclecount = 0 
 print('number of Cycles to Run set to ' + str(cycles))
+
+lcd = CharLCD(i2c_expander='PCF8574', address=0x27, port=1, cols=16, rows=2, dotsize=8)
+lcd.clear()
+print("LCD setup")
 
 while True:
     def forward():
@@ -109,6 +115,17 @@ while True:
         request = requests.post(url+"/attempt")
     if(angle > 360):
         break
+
+    attempts = requests.get(url+"/getAttempts") 
+    goals = requests.get(url+"/getGoals")
+
+    parsedAttempts = json.loads(attempts.text)
+    parsedGoals = json.loads(goals.text)
+
+    percentage = parsedGoals['goals'] / parsedAttempts['attempts'] * 100
+    print(percentage)
+
+    lcd.write_string('Attempts: ' + str(parsedAttempts['attempts']) + "\n\rGoals: " + str(parsedGoals['goals']) + " => " + str(percentage) + "%")
 
 GPIO.cleanup()
 print('Cycling Completed')
