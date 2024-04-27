@@ -13,6 +13,7 @@ PIN_ECHO = 23 # Ultrasoon Echo pin
 step = 0.9 # hoek per stap
 
 url = "http://169.254.148.52:5001/requests"
+url2 = "http://169.254.148.52:5001/"
 
 GPIO.cleanup()
 
@@ -116,8 +117,8 @@ while True:
     if(angle > 360):
         break
 
-    attempts = requests.get(url+"/getAttempts") 
-    goals = requests.get(url+"/getGoals")
+    attempts = requests.get(url2+"/getAttempts") 
+    goals = requests.get(url2+"/getGoals")
 
     parsedAttempts = json.loads(attempts.text)
     parsedGoals = json.loads(goals.text)
