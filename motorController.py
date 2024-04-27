@@ -49,8 +49,8 @@ lcd.clear()
 print("LCD setup")
 
 def refreshLCD():
-    attempts = requests.get(url2+"/getAttempts") 
-    goals = requests.get(url2+"/getGoals")
+    attempts = requests.get(url+"/getAttempts") 
+    goals = requests.get(url+"/getGoals")
 
     print(attempts)
 
