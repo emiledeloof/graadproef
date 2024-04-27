@@ -1,6 +1,7 @@
 # Bibliotheken importeren
 import RPi.GPIO as GPIO
 import time
+import requests
 
 #constanten definieren
 PUL = 14  # Driver PUL pin
@@ -8,6 +9,8 @@ DIR = 15  # Driver DIR pin
 PIN_TRIGGER = 24 # Ultrasoon Trig pin
 PIN_ECHO = 23 # Ultrasoon Echo pin
 step = 0.9 # hoek per stap
+
+url = "http://169.254.148.52:5001/requests"
 
 GPIO.cleanup()
 
@@ -103,6 +106,7 @@ while True:
             print('Number of cycles remaining: ' + str(cycles - cyclecount))
         
         isArmDown = False
+        request = requests.post(url+"/attempt")
     if(angle > 360):
         break
 
