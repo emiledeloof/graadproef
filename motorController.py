@@ -52,6 +52,8 @@ def refreshLCD():
     attempts = requests.get(url2+"/getAttempts") 
     goals = requests.get(url2+"/getGoals")
 
+    print(attempts)
+
     parsedAttempts = json.loads(attempts.text)
     parsedGoals = json.loads(goals.text)
 
