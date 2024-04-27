@@ -9,6 +9,8 @@ PIN_TRIGGER = 24 # Ultrasoon Trig pin
 PIN_ECHO = 23 # Ultrasoon Echo pin
 step = 0.9 # hoek per stap
 
+GPIO.cleanup()
+
 # BCM ipv Board
 GPIO.setmode(GPIO.BCM)
 
