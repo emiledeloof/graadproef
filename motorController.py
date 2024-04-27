@@ -48,7 +48,20 @@ lcd = CharLCD(i2c_expander='PCF8574', address=0x27, port=1, cols=16, rows=2, dot
 lcd.clear()
 print("LCD setup")
 
+def refreshLCD():
+    attempts = requests.get(url2+"/getAttempts") 
+    goals = requests.get(url2+"/getGoals")
+
+    parsedAttempts = json.loads(attempts.text)
+    parsedGoals = json.loads(goals.text)
+
+    percentage = parsedGoals['goals'] / parsedAttempts['attempts'] * 100
+    print(percentage)
+
+    lcd.write_string('Attempts: ' + str(parsedAttempts['attempts']) + "\n\rGoals: " + str(parsedGoals['goals']) + " => " + str(percentage) + "%")
+
 while True:
+    refreshLCD()
     def forward():
         time.sleep(.0005) # pauze tussen pulsen
         GPIO.output(DIR, GPIO.LOW) # geen pulsen sturen naar DIR pin op driver => CW draaien. 
@@ -116,17 +129,6 @@ while True:
         request = requests.post(url+"/attempt")
     if(angle > 360):
         break
-
-    attempts = requests.get(url2+"/getAttempts") 
-    goals = requests.get(url2+"/getGoals")
-
-    parsedAttempts = json.loads(attempts.text)
-    parsedGoals = json.loads(goals.text)
-
-    percentage = parsedGoals['goals'] / parsedAttempts['attempts'] * 100
-    print(percentage)
-
-    lcd.write_string('Attempts: ' + str(parsedAttempts['attempts']) + "\n\rGoals: " + str(parsedGoals['goals']) + " => " + str(percentage) + "%")
 
 GPIO.cleanup()
 print('Cycling Completed')
