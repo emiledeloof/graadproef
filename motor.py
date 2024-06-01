@@ -16,6 +16,7 @@ US3_ECHO = 8
 STEP = 0.9
 URL = "https://swishbot.onrender.com/requests"
 
+GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
 
 GPIO.setup(PUL, GPIO.OUT)
