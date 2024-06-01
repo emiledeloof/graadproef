@@ -37,9 +37,9 @@ GPIO.setup(US3_TRIG, GPIO.OUT)
 GPIO.setup(US3_ECHO, GPIO.IN)
 GPIO.output(US3_TRIG, GPIO.LOW)
 
-pulses = 100
+pulses = 60
 pulseDone = 0
-delay = 0.01
+delay = 0.0005
 angle = 0
 
 isArmDown = False
