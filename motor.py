@@ -55,7 +55,7 @@ def refreshLCD():
 
     parsedAttempts = json.loads(attempts.text)
     parsedGoals = json.loads(goals.text)
-
+    print(parsedGoals)
     percentage = float(parsedGoals['goals']) / float(parsedAttempts['attempts']) * 100
     percentage = int(percentage)
 
@@ -77,6 +77,7 @@ def calculateDistance():
     pulse_duration = pulse_end_time - pulse_start_time
     distance = round(pulse_duration * 17150, 2)
     print("Distance:",distance,"cm")
+    time.sleep(0.01)
     return distance
 
 def moveMotor():
@@ -85,16 +86,19 @@ def moveMotor():
     GPIO.output(PUL, GPIO.LOW)
     time.sleep(delay)
 
+# while True:
+    # if(calculateDistance() < 10):
+        # refreshLCD()
 while pulseDone <= pulses:
-    GPIO.output(DIR, GPIO.LOW)
-    moveMotor()
-    pulseDone += 1
-    angle += STEP
-    print("Angle: " + str(round(angle, 2)))
+            GPIO.output(DIR, GPIO.LOW)
+            moveMotor()
+            pulseDone += 1
+            angle += STEP
+            print("Angle: " + str(round(angle, 2)))
 
-while pulseDone != 0:
-    GPIO.output(DIR, GPIO.HIGH)
-    moveMotor()
-    pulseDone -= 1
-    angle -= STEP
-    print("Angle: " + str(round(angle, 2)))
+# while pulseDone != 0:
+#     GPIO.output(DIR, GPIO.HIGH)
+#     moveMotor()
+#     pulseDone -= 1
+#     angle -= STEP
+#     print("Angle: " + str(round(angle, 2)))
