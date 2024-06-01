@@ -40,6 +40,7 @@ GPIO.output(US3_TRIG, GPIO.LOW)
 pulses = 60
 pulseDone = 0
 delay = 0.0005
+delay2 = 0.001
 angle = 0
 
 isArmDown = False
@@ -87,6 +88,13 @@ def moveMotor():
     GPIO.output(PUL, GPIO.LOW)
     time.sleep(delay)
 
+
+def moveMotorBack():
+    GPIO.output(PUL, GPIO.HIGH)
+    time.sleep(delay2)
+    GPIO.output(PUL, GPIO.LOW)
+    time.sleep(delay2)
+
 # while True:
     # if(calculateDistance() < 10):
         # refreshLCD()
@@ -97,9 +105,9 @@ while pulseDone <= pulses:
             angle += STEP
             print("Angle: " + str(round(angle, 2)))
 
-# while pulseDone != 0:
-#     GPIO.output(DIR, GPIO.HIGH)
-#     moveMotor()
-#     pulseDone -= 1
-#     angle -= STEP
-#     print("Angle: " + str(round(angle, 2)))
+while pulseDone != 0:
+    GPIO.output(DIR, GPIO.HIGH)
+    moveMotorBack()
+    pulseDone -= 1
+    angle -= STEP
+    print("Angle: " + str(round(angle, 2)))
