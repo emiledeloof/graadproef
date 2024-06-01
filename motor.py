@@ -106,6 +106,7 @@ while pulseDone <= pulses:
             print("Angle: " + str(round(angle, 2)))
 
 while pulseDone != 0:
+    time.sleep(0.5)
     GPIO.output(DIR, GPIO.HIGH)
     moveMotorBack()
     pulseDone -= 1
