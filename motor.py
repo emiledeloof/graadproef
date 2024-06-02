@@ -56,10 +56,11 @@ def refreshLCD():
     lcd.clear()
     attempts = requests.get(URL+"/getAttempts") 
     goals = requests.get(URL+"/getGoals")
+    print(attempts)
 
     parsedAttempts = json.loads(attempts.text)
     parsedGoals = json.loads(goals.text)
-    print(parsedGoals)
+    
     percentage = float(parsedGoals['goals']) / float(parsedAttempts['attempts']) * 100
     percentage = int(percentage)
 
