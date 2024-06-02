@@ -53,17 +53,17 @@ print("LCD setup")
 
 def refreshLCD():
     lcd.clear()
-    # attempts = requests.get(URL+"/getAttempts") 
-    # goals = requests.get(URL+"/getGoals")
+    attempts = requests.get(URL+"/getAttempts") 
+    goals = requests.get(URL+"/getGoals")
 
-    # parsedAttempts = json.loads(attempts.text)
-    # parsedGoals = json.loads(goals.text)
-    # print(parsedGoals)
-    # percentage = float(parsedGoals['goals']) / float(parsedAttempts['attempts']) * 100
-    # percentage = int(percentage)
+    parsedAttempts = json.loads(attempts.text)
+    parsedGoals = json.loads(goals.text)
+    print(parsedGoals)
+    percentage = float(parsedGoals['goals']) / float(parsedAttempts['attempts']) * 100
+    percentage = int(percentage)
 
-    # lcd.write_string('Attempts: ' + str(parsedAttempts['attempts']) + "\n\rGoals: " + str(parsedGoals['goals']) + " => " + str(percentage) + "%")
-    lcd.write_string(str(random.randint(0,10)))
+    lcd.write_string('Attempts: ' + str(parsedAttempts['attempts']) + "\n\rGoals: " + str(parsedGoals['goals']) + " => " + str(percentage) + "%")
+    # lcd.write_string(str(random.randint(0,10)))
 
 def calculateDistanceArm():
     pulse_end_time = 0
