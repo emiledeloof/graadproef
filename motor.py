@@ -37,10 +37,10 @@ GPIO.setup(US3_TRIG, GPIO.OUT)
 GPIO.setup(US3_ECHO, GPIO.IN)
 GPIO.output(US3_TRIG, GPIO.LOW)
 
-pulses = 60
+pulses = 24
 pulseDone = 0
-delay = 0.0005
-delay2 = 0.001
+delay = 0.0011
+delay2 = 0.005
 angle = 0
 
 isArmDown = False
@@ -105,10 +105,10 @@ while pulseDone <= pulses:
             angle += STEP
             print("Angle: " + str(round(angle, 2)))
 
-while pulseDone != 0:
-    time.sleep(0.5)
-    GPIO.output(DIR, GPIO.HIGH)
-    moveMotorBack()
-    pulseDone -= 1
-    angle -= STEP
-    print("Angle: " + str(round(angle, 2)))
+time.sleep(0.5)
+#while pulseDone-10 != 0:
+#    GPIO.output(DIR, GPIO.HIGH)
+#    moveMotorBack()
+#    pulseDone -= 1
+#    angle -= STEP
+#    print("Angle: " + str(round(angle, 2)))
