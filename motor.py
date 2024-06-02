@@ -144,23 +144,26 @@ while True:
             requests.post(URL+"/attempt")
             refreshLCD()
             time.sleep(1)
+            i = 0
             while pulseDone <= pulses:
                 GPIO.output(DIR, GPIO.LOW)
                 moveMotor()
                 pulseDone += 1
                 angle += STEP
-                print("Angle: " + str(round(angle, 2)))
+                # print("Angle: " + str(round(angle, 2)))
             time.sleep(1.5)
-            if(calculateDistanceGoal() < 12):
-                lcd.clear()
-                lcd.write_string("GOAL!")
-                requests.post(URL+"/goal")
+            for i in range(10):
+                if(calculateDistanceGoal() < 12):
+                    lcd.clear()
+                    lcd.write_string("GOAL!")
+                    requests.post(URL+"/goal")
+                    i = 9
     else:
         time.sleep(0.5)
         while calculateDistanceArm() > 10:
             GPIO.output(DIR, GPIO.HIGH)
             moveMotorBack()
             angle -= STEP
-            print("Angle: " + str(round(angle, 2)))
+            # print("Angle: " + str(round(angle, 2)))
         pulseDone = 0
         time.sleep(1)
