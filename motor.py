@@ -9,11 +9,11 @@ PUL = 14
 DIR = 15
 US1_TRIG = 24 # Ultrasoon1 Trig pin
 US1_ECHO = 23 # Ultrasoon1 Echo pin
-US2_TRIG = 27
-US2_ECHO = 22
-US3_TRIG = 25
-US3_ECHO = 8
-STEP = 0.9
+US2_TRIG = 25
+US2_ECHO = 8
+US3_TRIG = 27
+US3_ECHO = 17
+STEP = 1.8
 URL = "https://swishbot.onrender.com/requests"
 
 GPIO.cleanup()
@@ -46,9 +46,9 @@ angle = 0
 isArmDown = False
 isBallThrown = False
 
-# lcd = CharLCD(i2c_expander='PCF8574', address=0x27, port=1, cols=16, rows=2, dotsize=8)
-# lcd.clear()
-# print("LCD setup")
+lcd = CharLCD(i2c_expander='PCF8574', address=0x27, port=1, cols=16, rows=2, dotsize=8)
+lcd.clear()
+print("LCD setup")
 
 def refreshLCD():
     lcd.clear()
@@ -95,20 +95,21 @@ def moveMotorBack():
     GPIO.output(PUL, GPIO.LOW)
     time.sleep(delay2)
 
-# while True:
-    # if(calculateDistance() < 10):
-        # refreshLCD()
-while pulseDone <= pulses:
+while True:
+    if(calculateDistance() < 10):
+        refreshLCD()
+        while pulseDone <= pulses:
             GPIO.output(DIR, GPIO.LOW)
             moveMotor()
             pulseDone += 1
             angle += STEP
             print("Angle: " + str(round(angle, 2)))
+            break
 
-time.sleep(0.5)
-#while pulseDone-10 != 0:
-#    GPIO.output(DIR, GPIO.HIGH)
-#    moveMotorBack()
-#    pulseDone -= 1
-#    angle -= STEP
-#    print("Angle: " + str(round(angle, 2)))
+    time.sleep(0.5)
+    while pulseDone-5 != 0:
+        GPIO.output(DIR, GPIO.HIGH)
+        moveMotorBack()
+        pulseDone -= 1
+        angle -= STEP
+        print("Angle: " + str(round(angle, 2)))
