@@ -15,7 +15,8 @@ US2_ECHO = 8
 US3_TRIG = 27   #gescoord?
 US3_ECHO = 17
 STEP = 1.8
-URL = "https://swishbot.onrender.com/requests"
+# URL = "https://swishbot.onrender.com/requests"
+URL = "http://192.168.0.101:5001/requests"
 
 GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
