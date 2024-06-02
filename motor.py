@@ -65,7 +65,7 @@ def refreshLCD():
     percentage = float(parsedGoals['goals']) / float(parsedAttempts['attempts']) * 100
     percentage = int(percentage)
 
-    lcd.write_string('Attempts: ' + str(parsedAttempts['attempts']) + "\n\rGoals: " + str(parsedGoals['goals']) + " => " + str(percentage) + "%")
+    lcd.write_string('Schoten: ' + str(parsedAttempts['attempts']) + "\n\rGoals: " + str(parsedGoals['goals']) + " => " + str(percentage) + "%")
     # lcd.write_string(str(random.randint(0,10)))
 
 def calculateDistanceArm():
