@@ -109,7 +109,7 @@ while True:
     else:
         print("went here")
         time.sleep(0.5)
-        while pulseDone-5 <= 0:
+        while pulseDone-5 >= 0:
             GPIO.output(DIR, GPIO.HIGH)
             moveMotorBack()
             pulseDone -= 1
