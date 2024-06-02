@@ -107,9 +107,8 @@ while True:
             angle += STEP
             print("Angle: " + str(round(angle, 2)))
     else:
-        print("went here")
         time.sleep(0.5)
-        while pulseDone-5 >= 0:
+        while pulseDone-1 >= 0:
             GPIO.output(DIR, GPIO.HIGH)
             moveMotorBack()
             pulseDone -= 1
