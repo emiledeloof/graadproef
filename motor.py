@@ -63,7 +63,7 @@ def refreshLCD():
     # percentage = int(percentage)
 
     # lcd.write_string('Attempts: ' + str(parsedAttempts['attempts']) + "\n\rGoals: " + str(parsedGoals['goals']) + " => " + str(percentage) + "%")
-    lcd.write_string(random.randint(0,10))
+    lcd.write_string(str(random.randint(0,10)))
 
 def calculateDistance():
     pulse_end_time = 0
