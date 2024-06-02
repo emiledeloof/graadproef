@@ -7,11 +7,11 @@ from RPLCD.i2c import CharLCD
 
 PUL = 14
 DIR = 15
-US1_TRIG = 24 # Ultrasoon1 Trig pin
+US1_TRIG = 24 # Ultrasoon1 Trig pin // Arm beneden?
 US1_ECHO = 23 # Ultrasoon1 Echo pin
-US2_TRIG = 25
+US2_TRIG = 25   # bal in arm?
 US2_ECHO = 8
-US3_TRIG = 27
+US3_TRIG = 27   #gescoord?
 US3_ECHO = 17
 STEP = 1.8
 URL = "https://swishbot.onrender.com/requests"
