@@ -65,7 +65,7 @@ def refreshLCD():
     # lcd.write_string('Attempts: ' + str(parsedAttempts['attempts']) + "\n\rGoals: " + str(parsedGoals['goals']) + " => " + str(percentage) + "%")
     lcd.write_string(str(random.randint(0,10)))
 
-def calculateDistance():
+def calculateDistanceArm():
     pulse_end_time = 0
     pulse_start_time = 0
     GPIO.output(US1_TRIG, GPIO.HIGH)
@@ -76,6 +76,42 @@ def calculateDistance():
         pulse_start_time = time.time()
 
     while GPIO.input(US1_ECHO)==1:
+        pulse_end_time = time.time()
+
+    pulse_duration = pulse_end_time - pulse_start_time
+    distance = round(pulse_duration * 17150, 2)
+    print("Distance:",distance,"cm")
+    time.sleep(0.01)
+    return distance
+def calculateDistanceBall():
+    pulse_end_time = 0
+    pulse_start_time = 0
+    GPIO.output(US2_TRIG, GPIO.HIGH)
+    time.sleep(0.00001)
+    GPIO.output(US2_TRIG, GPIO.LOW)
+
+    while GPIO.input(US2_ECHO)==0:
+        pulse_start_time = time.time()
+
+    while GPIO.input(US2_ECHO)==1:
+        pulse_end_time = time.time()
+
+    pulse_duration = pulse_end_time - pulse_start_time
+    distance = round(pulse_duration * 17150, 2)
+    print("Distance:",distance,"cm")
+    time.sleep(0.01)
+    return distance
+def calculateDistanceGoal():
+    pulse_end_time = 0
+    pulse_start_time = 0
+    GPIO.output(US3_TRIG, GPIO.HIGH)
+    time.sleep(0.00001)
+    GPIO.output(US3_TRIG, GPIO.LOW)
+
+    while GPIO.input(US3_ECHO)==0:
+        pulse_start_time = time.time()
+
+    while GPIO.input(US3_ECHO)==1:
         pulse_end_time = time.time()
 
     pulse_duration = pulse_end_time - pulse_start_time
@@ -98,20 +134,21 @@ def moveMotorBack():
     time.sleep(delay2)
 
 while True:
-    if(calculateDistance() < 10):
-        refreshLCD()
-        while pulseDone <= pulses:
-            GPIO.output(DIR, GPIO.LOW)
-            moveMotor()
-            pulseDone += 1
-            angle += STEP
-            print("Angle: " + str(round(angle, 2)))
+    if(calculateDistanceArm() < 10):
+        if(calculateDistanceBall() < 5):
+            refreshLCD()
+            while pulseDone <= pulses:
+                GPIO.output(DIR, GPIO.LOW)
+                moveMotor()
+                pulseDone += 1
+                angle += STEP
+                print("Angle: " + str(round(angle, 2)))
     else:
         time.sleep(0.5)
-        while calculateDistance() > 10:
+        while calculateDistanceArm() > 10:
             GPIO.output(DIR, GPIO.HIGH)
             moveMotorBack()
             angle -= STEP
             print("Angle: " + str(round(angle, 2)))
-	pulseDone = 0
+        pulseDone = 0
         time.sleep(1)
