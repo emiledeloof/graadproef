@@ -4,6 +4,7 @@ import requests
 import json
 import sys
 from RPLCD.i2c import CharLCD
+import random
 
 PUL = 14
 DIR = 15
@@ -52,16 +53,17 @@ print("LCD setup")
 
 def refreshLCD():
     lcd.clear()
-    attempts = requests.get(URL+"/getAttempts") 
-    goals = requests.get(URL+"/getGoals")
+    # attempts = requests.get(URL+"/getAttempts") 
+    # goals = requests.get(URL+"/getGoals")
 
-    parsedAttempts = json.loads(attempts.text)
-    parsedGoals = json.loads(goals.text)
-    print(parsedGoals)
-    percentage = float(parsedGoals['goals']) / float(parsedAttempts['attempts']) * 100
-    percentage = int(percentage)
+    # parsedAttempts = json.loads(attempts.text)
+    # parsedGoals = json.loads(goals.text)
+    # print(parsedGoals)
+    # percentage = float(parsedGoals['goals']) / float(parsedAttempts['attempts']) * 100
+    # percentage = int(percentage)
 
-    lcd.write_string('Attempts: ' + str(parsedAttempts['attempts']) + "\n\rGoals: " + str(parsedGoals['goals']) + " => " + str(percentage) + "%")
+    # lcd.write_string('Attempts: ' + str(parsedAttempts['attempts']) + "\n\rGoals: " + str(parsedGoals['goals']) + " => " + str(percentage) + "%")
+    lcd.write_string(random.randint(0,10))
 
 def calculateDistance():
     pulse_end_time = 0
