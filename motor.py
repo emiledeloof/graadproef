@@ -84,6 +84,7 @@ def calculateDistanceArm():
     print("Distance:",distance,"cm")
     time.sleep(0.01)
     return distance
+
 def calculateDistanceBall():
     pulse_end_time = 0
     pulse_start_time = 0
@@ -102,6 +103,7 @@ def calculateDistanceBall():
     print("Distance:",distance,"cm")
     time.sleep(0.1)
     return distance
+
 def calculateDistanceGoal():
     pulse_end_time = 0
     pulse_start_time = 0
@@ -137,6 +139,7 @@ def moveMotorBack():
 while True:
     if(calculateDistanceArm() < 10):
         if(calculateDistanceBall() < 5):
+            requests.post(URL+"/attempt")
             refreshLCD()
             time.sleep(1)
             while pulseDone <= pulses:
@@ -145,6 +148,10 @@ while True:
                 pulseDone += 1
                 angle += STEP
                 print("Angle: " + str(round(angle, 2)))
+            if(calculateDistanceGoal() < 12):
+                lcd.clear()
+                lcd.write_string("GOAL!")
+                requests.post(URL+"/goal")
     else:
         time.sleep(0.5)
         while calculateDistanceArm() > 10:
