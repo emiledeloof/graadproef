@@ -114,3 +114,4 @@ while True:
             pulseDone -= 1
             angle -= STEP
             print("Angle: " + str(round(angle, 2)))
+        time.sleep(1)
