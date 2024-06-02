@@ -141,8 +141,8 @@ def moveMotorBack():
 while True:
     if(calculateDistanceArm() < 10):
         if(calculateDistanceBall() < 5):
-            requests.post(URL+"/attempt")
             refreshLCD()
+            requests.post(URL+"/attempt")
             time.sleep(1)
             i = 0
             goal = False
