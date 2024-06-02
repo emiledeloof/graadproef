@@ -83,7 +83,7 @@ def calculateDistanceArm():
 
     pulse_duration = pulse_end_time - pulse_start_time
     distance = round(pulse_duration * 17150, 2)
-    print("Distance:",distance,"cm")
+    # print("Distance:",distance,"cm")
     time.sleep(0.01)
     return distance
 
@@ -102,7 +102,7 @@ def calculateDistanceBall():
 
     pulse_duration = pulse_end_time - pulse_start_time
     distance = round(pulse_duration * 17150, 2)
-    print("Distance:",distance,"cm")
+    # print("Distance:",distance,"cm")
     time.sleep(0.1)
     return distance
 
