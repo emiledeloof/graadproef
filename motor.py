@@ -145,6 +145,7 @@ while True:
             refreshLCD()
             time.sleep(1)
             i = 0
+            goal = False
             while pulseDone <= pulses:
                 GPIO.output(DIR, GPIO.LOW)
                 moveMotor()
@@ -156,8 +157,10 @@ while True:
                 if(calculateDistanceGoal() < 12):
                     lcd.clear()
                     lcd.write_string("GOAL!")
-                    requests.post(URL+"/goal")
+                    goal = True
                     i = 9
+            if(goal == True):
+                requests.post(URL+"/goal")
     else:
         time.sleep(0.5)
         while calculateDistanceArm() > 10:
