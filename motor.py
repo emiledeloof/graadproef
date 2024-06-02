@@ -137,6 +137,7 @@ while True:
     if(calculateDistanceArm() < 10):
         if(calculateDistanceBall() < 5):
             refreshLCD()
+            time.sleep(1)
             while pulseDone <= pulses:
                 GPIO.output(DIR, GPIO.LOW)
                 moveMotor()
