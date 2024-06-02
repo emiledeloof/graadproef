@@ -160,7 +160,6 @@ while True:
                     goal = True
                     i = 9
             if(goal == True):
-                print("posting")
                 requests.post(URL+"/goal")
     else:
         time.sleep(0.5)
