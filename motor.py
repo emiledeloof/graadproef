@@ -154,7 +154,7 @@ while True:
                 # print("Angle: " + str(round(angle, 2)))
             time.sleep(1.5)
             for i in range(10):
-                if(calculateDistanceGoal() < 12):
+                if(calculateDistanceGoal() < 12 or calculateDistanceGoal() > 1200):
                     lcd.clear()
                     lcd.write_string("GOAL!")
                     goal = True
